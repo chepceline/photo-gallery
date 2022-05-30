@@ -1,24 +1,25 @@
 {%extends 'photos/base.html'%}
-{% load static%}
+{% load static %}
 {% block content %}
 
-<!-- Landing Page -->
-<div class="banner">
-    <div class="cover">
-        <div class="container image">
-            <h2 id="category">If you can't make it good, at least make it look good.</h2>
-            <form class="form" role="search" action="{% url 'search_image' %}">
+{{block.super}}
 
+<!-- Landing Page -->
+<div class="banner-1">
+    <div class="cover-1">
+        {% if images%}
+        <h2>Found {{ images|length}} images for searched term {{message}}</h2>
+        {% else %}
+        <h2>Found 0 articles for the search term {{message}}</h2>
+        {% endif %}
+        <div class="container imageloc">
+            <form class="form" role="search" action="{% url 'search_image' %}">
                 <div class="input-group">
-                  <input type="text" class="form-control" placeholder="&#xf3ee; Search by category" name="image_category">
+                  <input type="text" class="form-control" placeholder="&#xf3ee; Search by category"name="image_category">
                   <br>
                  </div>
-
                  <small>Trending searches: fashion, travel</small>
-
               </form>
-            <p>Taking an image, freezing a moment, reveals how rich reality truly is </p>
-            <a href="#gallery">VIEW GALLERY</a>
         </div>
     </div>
 </div>
@@ -26,10 +27,10 @@
 
 <div class="container wrap">
     <!-- Looping through images -->
-    <div class="row" id="gallery">
+    <div class="row">
     {% for image in images %}
         <!-- displaying images -->
-         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
+         <div class="col-xs-6 col-sm-6  col-md-4 col-lg-3">
                  <div class="portfolio-wrap ">
                      <div class="portfolio-wrap hovereffect">
                          <a class="img-overlay" data-toggle="modal" data-target="#{{image.id}}" style="width:100%">
@@ -41,19 +42,19 @@
                      </div>
                  </div>
              </div>
-    {% empty %}
+        {% empty %}
     </div>
     <div class="row">
         <div class="col-sm-6 col-md-6 col-lg-6">
-            <img src="{% static 'images/bike.jpg' %}" alt="" class="oops">
+            <img src="{% static 'images/sorry.png' %}" alt="" class = "oops">
         </div>
         <div class="col-sm-6 col-md-6 col-lg-6">
-            <h2 class="text-center"> Sorry no images for now they are comming soon.</h2>
+            <h2 class="text-center"> Sorry no image for {{message}} category. Images are comming soon.</h2>
         </div>
     </div>
     {% endfor %}
 
-    <!-- Image details modal -->
+    <!-- looping through image details modal class -->
     {% for image in images %}
         <div class="modal fade" id="{{image.id}}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -68,12 +69,11 @@
                         <div class="row">
                             <div class="col-md-9 col-lg-9">
                                 <a href="{% url 'single' category_name=image.image_category.name image_id=image.id %}"><img id="img{{image.id}}" src="{{image.picture.cdn_url}}" class="img-thumbnail" alt="Image" style="cursor:pointer"></a>
-
                             </div>
                             <div class="col-md-3">
-                                <h4 class = "desc">Location</h4>
+                                <h4>Location</h4>
                                 <p>{{image.image_location.name}}</p>
-                                <h4 class = "desc">Category</h4>
+                                <h4>Category</h4>
                                 <p>{{image.image_category.name}}</p>
                             </div>
                             <div>
@@ -83,9 +83,9 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <!-- <input class="form-control" type="text" value="{{image.image_link}}" id="link"> -->
                         <button type="button" class="btn btn-secondary" onclick="copy('img{{image.id}}')">Copy Link</button>
-                        <!-- <input class="form-control" type="text" value="{{image.image_link}}" id="link">
-                       <a onclick="myFunction()"><button type="button"  class="btn btn-primary">Copy Link</button></a> -->
+                       <!-- <a onclick="myFunction()"><button type="button"  class="btn btn-primary">Copy Link</button></a> -->
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
