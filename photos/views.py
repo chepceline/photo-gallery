@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Category, Photo
 
 # Create your views here.
@@ -14,7 +14,9 @@ def viewPhoto(request, pk):
     return render(request, 'photos/photo.html', {'photo': photo})
 
 
-def addPhoto(request):
-    return render(request, 'photos/add.html')
+def search_image(request):
+    title = 'Search'
+    return render(request, 'search.html')
+
 
  
