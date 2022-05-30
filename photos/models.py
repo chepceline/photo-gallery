@@ -28,7 +28,6 @@ class Photo(models.Model):
     name = models.CharField(max_length = 60, null=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     image = models.ImageField(null=False, blank=False)
-    pic = models.ImageField(upload_to = 'uploads/', null=True)
     description = models.TextField()
     image_location = models.ForeignKey('Location', on_delete=models.SET_NULL, null=True)
 
