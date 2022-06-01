@@ -8,7 +8,7 @@ Gallery is a  web application to showcase beautiful pictures. Users get can view
 - Users can also search for images based  on categories
 
 ## View Live Site here
-View the complete site [here]
+https://celgallery.herokuapp.com/
 ## Technologies Used
     - Python 3.8
     - Django MVC framework
