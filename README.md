@@ -1,4 +1,3 @@
-
 ## Description
 
 Gallery is a  web application to showcase beautiful pictures. Users get can view photos uploaded by admin. Users can see photos based on the category, by clicking on the listed locations in the menu. They can also copy the link to a photo to paste at their discretion. They can also search for photos based on the categories.
